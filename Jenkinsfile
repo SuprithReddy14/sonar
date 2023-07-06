@@ -11,14 +11,18 @@ pipeline {
         }
 
         stage("SonarQube analysis") {
-            agent any
             when {
                 anyOf {
                     branch 'feature/*'
                     branch 'main'
                 }
             }
-          }
+            steps {
+                withSonarEnv('sonar') {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
         stage("Quality Gate") {
             steps {
                 script {
