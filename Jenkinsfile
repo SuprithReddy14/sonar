@@ -1,36 +1,73 @@
 pipeline {
     agent any
-
     stages {
+
+        // CI Start
         stage('Build') {
             steps {
                 echo 'Build'
                 sh 'mvn package'
             }
         }
-        
-         stage("SonarQube analysis") {
+
+        stage("SonarQube analysis") {
             agent any
-            steps {
-              withSonarQubeEnv('sonar') {
-                sh 'mvn sonar:sonar'
-              }
+            when {
+                anyOf {
+                    branch 'feature/*'
+                    branch 'main'
+                }
             }
-          }
+            steps {
+                withSonarQubeEnv('Sonar') {
+                    sh 'mvn sonar:sonar'
+                }
+            }
+        }
+        stage("Quality Gate") {
+            steps {
+                script {
+                    try {
+                        timeout(time: 10, unit: 'MINUTES') {
+                            waitForQualityGate abortPipeline: true
+                        }
+                    }
+                    catch (Exception ex) {
 
-        // stage('Push') {.
-        //     steps {
-        //         echo 'Push'
+                    }
+                }
+            }
+        }
+        stage('Push') {
+            steps {
+                echo 'Push'
+            }
+        }
 
-        //         sh "aws s3 cp target/sample-1.0.3.jar s3://bermtecbatch32"
-        //     }
-        // }
+        // Ci Ended
 
-        // stage('Deploy') {
-        //     steps {
-        //         echo 'Build'
+        // CD Started
 
-        //         sh "aws lambda update-function-code --function-name $function_name --region us-east-1 --s3-bucket bermtecbatch32 --s3-key sample-1.0.3.jar"
-        //     }
+       
+        stage("Deployment") {
+            parallel {
+                stage('Deploy to Dev') {
+                    steps {
+                        echo 'Build'
+                    }
+                }
+
+                stage('Deploy to test ') {
+                    when {
+                        branch 'main'
+                    }
+                    steps {
+                        echo 'Build'
+                    }
+                }
+            }
+        }
+            
     }
+        // CD Ended
 }
