@@ -18,7 +18,7 @@ pipeline {
                 }
             }
             steps {
-                withSonarEnv('sonar') {
+                withSonarQubeEnv('sonar') {
                     sh 'mvn sonar:sonar'
                 }
             }
