@@ -20,7 +20,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<sonar.organization>suprithreddy14</sonar.organization>
 		<sonar.projectKey>suprithreddy14</sonar.projectKey>
-		
+		<sonar.projectName>sonar</sonar.projectName>
 	</properties>
 	<dependencies>
 	  <dependency>
