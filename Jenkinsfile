@@ -18,7 +18,7 @@ pipeline {
             }
           }
 
-        // stage('Push') {
+        // stage('Push') {.
         //     steps {
         //         echo 'Push'
 
