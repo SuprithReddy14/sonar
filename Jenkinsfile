@@ -18,22 +18,7 @@ pipeline {
                     branch 'main'
                 }
             }
-            steps {
-              withSonarQubeEnv('sonar') {
-                sh 'mvn sonar:sonar'
-              }
-            }
           }
-          stage("quality gate"){
-            steps{
-              timeout(time: 10,unit: 'MINUTES'){
-                waitForQualityGate abortPipeline: true
-              }
-                withSonarQubeEnv('Sonar') {
-                    sh 'mvn sonar:sonar'
-                }
-            }
-        }
         stage("Quality Gate") {
             steps {
                 script {
@@ -53,9 +38,6 @@ pipeline {
                 echo 'Push'
             }
           }
-    }
- }
-
         // Ci Ended
 
         // CD Started
