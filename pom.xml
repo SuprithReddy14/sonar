@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+``<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.example</groupId>
-	<artifactId>sonar</artifactId>
+	<artifactId>sample</artifactId>
 	<version>1.0.3</version>
-	<name>sonar</name>
+	<name>sample</name>
 	<packaging>jar</packaging>
 	<description>sample 2022 with Spring Boot</description>
 	<parent>
@@ -20,7 +20,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<sonar.organization>suprithreddy14</sonar.organization>
 		<sonar.projectKey>suprithreddy14</sonar.projectKey>
-		<sonar.projectName>sonar</sonar.projectName>
+		<sonar.projectName>sample</sonar.projectName>
 	</properties>
 	<dependencies>
 	  <dependency>
